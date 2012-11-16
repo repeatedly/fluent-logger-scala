@@ -13,9 +13,7 @@ class FluentLogger(javaLogger: JavaFluentLogger) {
   }
   
   def log(label: String, key: String, value: Object, timestamp: Long): Boolean = {
-    val data: ImmutableMap[String, Object] = new HashMap[String, Object]();
-    data.put(key, value);
-    log(label, data, timestamp);
+    log(label, MutableMap(key -> value), timestamp);
   }
   
   def log(label: String, data: MutableMap[String, Object]): Boolean = {

@@ -39,6 +39,12 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfter {
     data2.put("k3", "v3");
     data2.put("k4", "v4");
     logger.log("test01", data2);
+    logger.log("test01", data2, System.currentTimeMillis);
+    val data3 = data2.toMap
+    logger.log("test01", data3);
+    logger.log("test01", data3, System.currentTimeMillis);
+    logger.log("test01", "foo", "bar");
+    logger.log("test01", "foo", "bar", System.currentTimeMillis);
     
     FluentLoggerFactory.flushAll
     FluentLoggerFactory.closeAll
