@@ -8,10 +8,6 @@ publishMavenStyle := true
 
 crossScalaVersions := Seq("2.9.0", "2.9.1", "2.9.2")
 
-// TODO: support 2.9.2 or later version.
-//crossScalaVersions := Seq("2.8.1", "2.8.2", "2.9.0", "2.9.1", "2.9.2") //, "2.10.0-RC2")
-//crossVersion := CrossVersion.full
-
 scalaVersion := "2.9.0"
 
 resolvers ++= Seq(
@@ -19,13 +15,6 @@ resolvers ++= Seq(
   "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/",
   "MessagePack For Scala Repository" at "http://takezoux2.github.com/maven"
 )
-
-scalaBinaryVersion <<= scalaBinaryVersion { v =>
-  if (v.startsWith("2.10"))
-    "2.10.0-M7"
-  else
-    v
-}
 
 scalacOptions <++= scalaVersion map { v =>
   if (v.startsWith("2.10"))
@@ -35,20 +24,18 @@ scalacOptions <++= scalaVersion map { v =>
 }
 
 libraryDependencies ++= Seq(
-  "org.fluentd" % "fluent-logger" % "0.2.7",
+  "org.fluentd" % "fluent-logger" % "0.2.8",
   "org.scalatest" %% "scalatest" % "1.8" % "test",
   "junit" % "junit" % "4.10" % "test",
   "org.slf4j" % "slf4j-api" % "1.6.4",
-  "org.slf4j" % "slf4j-api" % "1.6.4",
-  "org.slf4j" % "slf4j-simple" % "1.6.4",
-  "org.msgpack" % "msgpack" % "0.6.7"
+  "org.slf4j" % "slf4j-simple" % "1.6.4"
 )
 
 libraryDependencies <++=  scalaVersion { sv =>
-  if (sv.startsWith("2.9.2"))
-    Seq("org.msgpack" % "msgpack-scala_2.9.1" % "0.6.6")
+  if (sv.startsWith("2.9.0"))
+    Seq("org.msgpack" % "msgpack-scala_2.9.1" % "0.6.7")
   else
-    Seq("org.msgpack" %% "msgpack-scala" % "0.6.6")
+    Seq("org.msgpack" %% "msgpack-scala" % "0.6.7")
 }
 
 
