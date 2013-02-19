@@ -35,7 +35,7 @@ libraryDependencies <++=  scalaVersion { sv =>
     Seq("net.liftweb" %% "lift-json" % "2.4",
         "org.scalatest" %% "scalatest" % "1.8" % "test")
   else //(sv.startsWith("2.10"))
-    Seq("net.liftweb" %% "lift-json" % "2.5-M4",
+    Seq("net.liftweb" %% "lift-json" % "2.5-M4" exclude("org.specs2","specs2_2.10"),
         "org.scalatest" %% "scalatest" % "1.9.1" % "test")
 }
 
