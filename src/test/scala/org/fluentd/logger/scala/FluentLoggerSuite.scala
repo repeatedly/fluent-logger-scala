@@ -159,6 +159,17 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfter {
     FluentLoggerFactory.closeAll
   }
 
+  test("test sending Loggable object") {
+    val logger0 = FluentLoggerFactory.getLogger("debug")
+    val ts = System.currentTimeMillis
+    val o = new Loggable {
+      def toRecord = Map("key" -> "value")
+    }
+    logger0.log("test01", o, ts);
+    FluentLoggerFactory.flushAll
+    FluentLoggerFactory.closeAll
+  }
+
   test("close") {
     FluentLoggerFactory.getLogger("tag1");
     FluentLoggerFactory.getLogger("tag2");

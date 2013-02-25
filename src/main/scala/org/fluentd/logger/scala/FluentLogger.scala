@@ -28,6 +28,14 @@ case class FluentLogger(tag :String, sender: Sender) {
     else 
       sender.emit(tag + "." + label, data.toMap)
   }
+
+  def log(label: String, l: Loggable): Boolean = {
+    log(label, l.toRecord, 0)
+  }
+
+  def log(label: String, l: Loggable, timestamp: Long): Boolean = {
+    log(label, l.toRecord, timestamp)
+  }
   
   def flush() = sender.flush() 
   
