@@ -4,16 +4,16 @@ organization := "org.fluentd"
 name := "fluent-logger-scala"
 
 publishMavenStyle := true
-scalaVersion := "2.12.1"
-crossScalaVersions := Seq("2.11.8", scalaVersion.value)
+scalaVersion := "2.12.8"
+crossScalaVersions := Seq("2.11.12", scalaVersion.value, "2.13.0")
 scalacOptions ++= Seq("-deprecation", "-feature", "-language:implicitConversions")
 logBuffered in Test := false
 libraryDependencies ++= Seq(
-  "org.fluentd" % "fluent-logger" % "0.3.2",
-  "org.json4s" %% "json4s-native" % "3.5.0",
+  "org.fluentd" % "fluent-logger" % "0.3.4",
+  "org.json4s" %% "json4s-native" % "3.6.7",
   "junit" % "junit" % "4.12" % Test,
-  "org.xerial" %% "fluentd-standalone" % "0.14.11" % Test,
-  "org.scalatest" %% "scalatest" % "3.0.1" % Test
+  "org.xerial" %% "fluentd-standalone" % "1.6.2" % Test,
+  "org.scalatest" %% "scalatest" % "3.0.8" % Test
 )
 
 // Release settings

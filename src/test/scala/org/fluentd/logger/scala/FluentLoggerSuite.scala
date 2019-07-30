@@ -22,7 +22,7 @@ import org.junit.runner.RunWith
 import org.json4s.NoTypeHints
 import org.json4s.native.Serialization
 import org.scalatest.{BeforeAndAfterAll, Tag, FunSuite}
-import org.scalatest.junit.JUnitRunner
+import org.scalatestplus.junit.JUnitRunner
 import scala.collection.mutable.HashMap
 import xerial.fluentd.FluentdStandalone
 
@@ -36,7 +36,6 @@ class FluentLoggerSuite extends FunSuite with BeforeAndAfterAll {
   override def beforeAll(): Unit = {
     // Start local fluentd server
     fluentd = Some(FluentdStandalone.start())
-    val port = fluentd.get.port
     logger = fluentd.map(fd => FluentLoggerFactory.getLogger("debug", "localhost", fd.port)).getOrElse {
       fail("Failed to start fluentd")
     }

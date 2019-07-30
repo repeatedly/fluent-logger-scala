@@ -16,7 +16,7 @@ object MapSerializer extends Serializer[Map[String, Any]] {
         },
         Extraction.decompose(
           v match {
-            case vs: MutableMap[_,_] => vs.toMap
+            case vs: MutableMap[_, _] => vs.toMap
             case _ => v
           }
         )

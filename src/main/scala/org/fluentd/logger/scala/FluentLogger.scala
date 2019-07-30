@@ -3,7 +3,7 @@ package org.fluentd.logger.scala
 import org.fluentd.logger.scala.sender.Sender
 import scala.collection.Map
 
-case class FluentLogger(tag :String, sender: Sender) {
+case class FluentLogger(tag: String, sender: Sender) {
 
   def log(label: String, key: String, value: Any): Boolean = {
     log(label, key, value, 0)
@@ -41,7 +41,7 @@ case class FluentLogger(tag :String, sender: Sender) {
 
   def getName: String = sender.getName()
 
-  override def toString: String = sender.toString()
+  override def toString: String = sender.toString
 
   override def finalize(): Unit = sender.close()
 
