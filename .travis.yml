@@ -1,7 +1,8 @@
 language: scala
 scala:
-  - 2.11.8
-  - 2.12.1
+  - 2.11.12
+  - 2.12.8
+  - 2.13.0
 
 sudo: false
 
@@ -10,7 +11,13 @@ script: sbt ++$TRAVIS_SCALA_VERSION test
 before_install:
   - rvm install 2.2.0
   - rvm use 2.2.0
-  - gem install fluentd -v 0.14.11
+  - gem install fluentd -v 1.6.2
 
 jdk:
  - oraclejdk8
+
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+    - $HOME/.sbt
+    - $HOME/.coursier

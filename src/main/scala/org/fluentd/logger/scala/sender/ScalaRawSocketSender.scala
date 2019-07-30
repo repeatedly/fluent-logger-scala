@@ -8,20 +8,20 @@ import org.json4s._
 import org.json4s.native.Serialization
 import scala.collection.Map
 
-class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int) 
+class ScalaRawSocketSender(h: String, p: Int, to: Int, bufCap: Int)
     extends Sender {
-  implicit val formats = DefaultFormats + EventSerializer + MapSerializer
+  implicit val formats: Formats = DefaultFormats + EventSerializer + MapSerializer
   val LOG = java.util.logging.Logger.getLogger("ScalaRawSocketSender")
   val host = h
   val port = p
-  val bufferCapacity= bufCap
+  val bufferCapacity = bufCap
   val timeout = to
   val name = "%s_%d_%d_%d".format(host, port, timeout, bufferCapacity)
   val pendings = ByteBuffer.allocate(bufferCapacity)
   val server = new InetSocketAddress(host, port)
   val reconnector = new ExponentialDelayReconnector()
-  var socket:Socket = null
-  var out:BufferedOutputStream = null
+  var socket: Socket = null
+  var out: BufferedOutputStream = null
   open()
 
   def this(host:String, port:Int) {
@@ -96,7 +96,7 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
   }
 
   def emit(tag: String, timestamp: Long, data: Map[String, Any]): Boolean = {
-    emit(new Event(tag, timestamp, data))
+    emit(Event(tag, timestamp, data))
   }
 
   def emit(event: Event): Boolean = {
@@ -107,7 +107,7 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
     try {
       // serialize tag, timestamp and data
       val json = Serialization.write(event)
-      return send(json.getBytes("UTF-8"))
+      send(json.getBytes("UTF-8"))
     } catch {
       case e: IOException =>
         LOG.severe(s"Cannot serialize event: $event")
@@ -155,14 +155,14 @@ class ScalaRawSocketSender(h:String, p:Int, to:Int, bufCap:Int)
       clearBuffer()
     } catch {
       case e: IOException =>
-        LOG.throwing(this.getClass().getName(), "flush", e)
+        LOG.throwing(this.getClass.getName, "flush", e)
         reconnector.addErrorHistory(System.currentTimeMillis())
     }
   }
 
   def getName(): String = name
 
-  override def toString(): String = {
+  override def toString: String = {
     getName()
   }
 }

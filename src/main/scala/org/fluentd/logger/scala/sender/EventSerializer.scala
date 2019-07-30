@@ -15,9 +15,9 @@ object EventSerializer extends Serializer[Event] {
   def deserialize(implicit format: Formats): PartialFunction[(TypeInfo, JValue), Event] = {
     case (TypeInfo(EventClass, _), json) => json match {
       case JArray(JString(tag) :: JInt(time) :: JObject(obj) :: Nil) =>
-        new Event(tag, time.toLong, null)
+        Event(tag, time.toLong, null)
       case JNothing =>
-        new Event(null, 0, null)
+        Event(null, 0, null)
       case x => throw new MappingException(s"Can't convert $x to Event")
     }
   }

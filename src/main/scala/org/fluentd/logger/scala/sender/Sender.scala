@@ -7,11 +7,11 @@ trait Sender {
 
   def emit(tag: String, timestamp: Long, data: Map[String, Any]): Boolean
 
-  def flush()
+  def flush(): Unit
 
   def getBuffer(): Array[Byte]
 
-  def close()
+  def close(): Unit
 
   def getName(): String
 }
